@@ -1,0 +1,161 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+.fullWrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-y: hidden;
+}
+button:hover {
+  cursor: pointer;
+  transform: scale(0.98);
+}
+
+/* START Navbar */
+.btn {
+  border: none;
+  padding: 0.3rem;
+  border-radius: 10px;
+  background-color: white;
+  color: rgb(9, 84, 189);
+}
+.title {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1.5rem;
+}
+.nav {
+  padding: 1rem;
+  background-color: rgb(43, 127, 246);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.configuracion {
+  border-radius: 100%;
+  background-color: rgb(187, 168, 29);
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.line {
+  display: flex;
+  gap: 0.5rem;
+}
+/*END Navbar*/
+/*START Company List*/
+.companyList {
+  overflow-y: scroll;
+}
+.companyItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  gap: 1rem;
+}
+.companyName {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
+  color: rgb(48, 48, 48);
+  font-size: 0.9rem;
+}
+.regimenFiscal {
+  color: gray;
+}
+.dot {
+  width: 0.7rem;
+  height: 0.7rem;
+  background-color: rgb(197, 13, 13);
+  border-radius: 100%;
+  margin-inline: 0.3rem 1rem;
+}
+.date {
+  font-size: 0.8rem;
+  color:gray
+}
+.companyPreviewRight {
+  justify-self: end;
+}
+.companyPreviewLeft {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/*END Company List*/
+/* START Add Company Button */
+.addCompanyBtn {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+}
+.addCompanyBtn > button {
+  background-color: rgb(43, 127, 246);
+  border: none;
+  padding: 0.4rem;
+  border-radius: 10px;
+  color: rgb(255, 255, 255);
+}
+/* END Add Company Button */
+/* START add company modal form */
+.addCompanyModal {
+  background-color: rgb(176, 209, 255);
+  padding-block: 2rem;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+  z-index: 1;
+  position: absolute;
+  width: 100%;
+}
+.hideFormAddCompanyModal {
+  bottom: -100%;
+}
+.showFormAddCompanyModal {
+  bottom: 0%;
+}
+.formField {
+  display: flex;
+  flex-direction: column;
+  margin: 0.2rem 1rem;
+  padding: 0.4rem;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  gap: 0.2rem;
+}
+.formField > input, .formField > select {
+  font-size: 1rem;
+  border: none;
+  background-color: rgb(245, 245, 245);
+  border-radius: 5px;
+}
+.closeBtn:hover {
+  cursor: pointer;
+  background-color: rgb(125, 177, 250);
+}
+.closeBtn {
+  width: 1rem;
+  background-color: rgb(196, 221, 255);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  padding: 0.5rem;
+}
+.closeBtn > img {
+  width: 1rem;
+  text-align: right;
+}
+.left {
+  align-items: end;
+}
+.enviarBtn {
+  margin-top: 1rem;
+  padding: 1rem;
+}
+/* END add company modal form */
