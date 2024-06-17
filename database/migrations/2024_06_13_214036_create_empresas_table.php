@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('empresas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string("nombreEmpresa");
+            $table->string("nombreEmpresa")->unique();
             $table->string("regimenEmpresa");
             $table->string("rfcEmpresa");
             $table->string("domicilioFiscalEmpresa");

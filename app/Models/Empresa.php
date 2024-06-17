@@ -17,4 +17,9 @@ class Empresa extends Model
     {
         return $this->hasMany(Socio::class);
     }
+    
+    public function numeroSocios()
+    {
+        return $this->socios()->count();
+    }
 }

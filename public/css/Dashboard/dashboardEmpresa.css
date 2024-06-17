@@ -1,6 +1,7 @@
 * {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
 body {
   padding: 0;
   margin: 0;
@@ -14,7 +15,7 @@ body {
   overflow-y: hidden;
   overflow-x: hidden;
 }
-button:hover {
+.btn:hover {
   cursor: pointer;
   transform: scale(0.98);
 }
@@ -26,6 +27,9 @@ button:hover {
   border-radius: 10px;
   background-color: white;
   color: rgb(9, 84, 189);
+}
+.btn > a {
+  text-decoration: none;
 }
 .title {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -42,7 +46,7 @@ button:hover {
 .configuracion {
   border-radius: 100%;
   background-color: rgb(187, 168, 29);
-  width: 2rem;
+  min-width: 2rem;
   height: 2rem;
   display: flex;
   justify-content: center;
@@ -103,7 +107,11 @@ button:hover {
   bottom: 1rem;
   right: 1rem;
 }
-.addCompanyBtn > button {
+.addCompanyBtn > form > button:hover {
+  cursor: pointer;
+  transform: scale(0.98);
+}
+.addCompanyBtn > form > button {
   background-color: rgb(43, 127, 246);
   border: none;
   padding: 0.4rem;
@@ -190,6 +198,9 @@ button:hover {
   color: green;
   font-weight: bold;
 }
+.link {
+  color: rgb(61, 132, 255);
+}
 .alert {
   background-color: white;
   border-radius: 10px;
@@ -198,6 +209,9 @@ button:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 80%;
+  word-wrap: break-word; 
+  word-break: break-all; 
 }
 .entendidoBtn:hover {
   cursor: pointer;

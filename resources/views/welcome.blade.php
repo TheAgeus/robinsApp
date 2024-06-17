@@ -29,6 +29,7 @@
         @endif
 
         <form method="POST" action="{{ route('login') }}" class="flexCenterColumn">
+            @csrf
             <div class="formField">
                 <label for="user">Ingrese su usuario:</label>
                 <input type="text" name="user" id="user">
