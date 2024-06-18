@@ -9,6 +9,16 @@ class Socio extends Model
 {
     use HasFactory;
 
+    protected $fillable= [
+        'empresa_id',
+        'nombre',
+        'comprobanteDomicilioPdf',
+        'actaNacimientoPdf',
+        'inePdf',
+        'actaMatrimonioPdf',
+        'constanciaSituacionFiscalPdf'
+    ];
+
     public function empresa()
     {
         return $this->belongsTo(Empresa::class);

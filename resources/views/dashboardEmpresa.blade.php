@@ -39,21 +39,57 @@
     </div> 
     <!-- End Navbar -->
 
+    <div class="title">
+      <h3>Socios:</h3>
+    </div>
+
     <!-- Start Company Socio List -->
     <div class="companyList"> 
       {{-- Check if socios data is available --}}
       @if($empresa->numeroSocios() > 0)
-        @foreach($empresa->socios() as $socio)
+        @foreach($empresa->socios as $socio)
           <div class="companyItem" data-id="{{ $socio->id }}">
             <div class="companyPreviewLeft">
-              <div class="companyStatus">
-                <div class="dot"></div>
-              </div>
                 <div class="companyWords">
                   <div class="companyName">
                     {{ $socio->nombre }}
                   </div>
                 </div>
+            </div>
+            <div class="pdfLink">
+              <div class="pdfField">
+                <div class="img"><img src="{{ asset('imgs/pdf.png') }}" alt="pdfLogo"></div>
+                <div class="text">
+                  <a href="{{ route('showComprobanteDomicilio', ['id' => $socio->id]) }}">Comprobante de domicilio</a>
+                </div>
+              </div>
+              <div class="pdfField">
+                <div class="img"><img src="{{ asset('imgs/pdf.png') }}" alt="pdfLogo"></div>
+                <div class="text">
+                  <a href="{{ route('showActaNacimiento', ['id' => $socio->id]) }}">Acta de nacimiento</a>
+                </div>
+              </div>
+              <div class="pdfField">
+                <div class="img"><img src="{{ asset('imgs/pdf.png') }}" alt="pdfLogo"></div>
+                <div class="text">
+                  <a href="{{ route('showIne', ['id' => $socio->id]) }}">INE</a>
+                </div>
+              </div>
+              <div class="pdfField">
+                <div class="img"><img src="{{ asset('imgs/pdf.png') }}" alt="pdfLogo"></div>
+                <div class="text">
+                  <a href="{{ route('showActaMatrimonio', ['id' => $socio->id]) }}">Acta de matrimonio</a>
+                </div>
+              </div>
+              <div class="pdfField">
+                <div class="img"><img src="{{ asset('imgs/pdf.png') }}" alt="pdfLogo"></div>
+                <div class="text">
+                  <a href="{{ route('showConstanciaSituacionFiscal', ['id' => $socio->id]) }}">Constancia de situacion fiscal</a>
+                </div>
+              </div>
+            </div>
+            <div class="socioControls">
+              <div class="btn"></div>
             </div>
           </div>
         @endforeach
@@ -69,6 +105,11 @@
         @csrf
         <input type="hidden" name="idEmpresa" value="{{ $empresa->id }}">
         <button onclick="openModal()">Generar link</button>
+      </form>
+      <form action="{{ route('sendMail') }}" method="POST">
+        @csrf
+        <input type="hidden" name="idEmpresa" value="{{ $empresa->id }}">
+        <button type="submit">Enviar correo</button>
       </form>
     </div>
     <!-- End Add Button -->

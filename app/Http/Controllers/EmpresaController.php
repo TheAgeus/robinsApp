@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Empresa;
+use App\Models\Socio;
 use Illuminate\Support\Facades\URL;
 
 class EmpresaController extends Controller
@@ -49,7 +50,8 @@ class EmpresaController extends Controller
         {
             return view('upload')->with([
                 'empresaName' => $empresa->nombreEmpresa,
-                'empresaId' => $empresa->id
+                'empresaId' => $empresa->id,
+                'numeroSocios' => $empresa->numeroSocios()
             ]);
         }
         return "Ruta no encontrada :c";
@@ -72,9 +74,57 @@ class EmpresaController extends Controller
 
     public function uploadFiles(Request $request)
     {
-        // Crear n numero de socios con sus respectivos archivos
-        dd($request);
-        return($request);
+        $sociosNumero = $request->input('sociosNumero');
+        $partnerData = [];
+
+        for ($i = 0; $i < $sociosNumero; $i++) {
+            // Handle text input
+            $inputName = 'partnerName' . ($i + 1);
+            if ($request->has($inputName)) {
+                $socioName = $request->input($inputName);
+                $partnerData[$i]['socioName'] = $socioName;
+            }
+
+            // Array of file fields to process
+            $fileFields = [
+                'comprobanteDomicilio' => 'comprobanteDomicilio',
+                'actaNacimiento' => 'actaNacimiento',
+                'ine' => 'ine',
+                'actaMatrimonio' => 'actaMatrimonio',
+                'constanciaSituacionFiscal' => 'constanciaSituacionFiscal'
+            ];
+
+            // Loop through file fields
+            foreach ($fileFields as $key => $baseField) {
+                $fieldName = $baseField . ($i + 1);
+
+                if ($request->hasFile($fieldName)) {
+                    $file = $request->file($fieldName);
+                    $path = $file->getRealPath();
+                    $doc = file_get_contents($path);
+                    $base64 = base64_encode($doc);
+                    $mime = $file->getClientMimeType();
+
+                    // Store the processed file data in the partnerData array
+                    $partnerData[$i][$key] = $base64;
+                }
+            }
+
+            // Loop through partnerData and store it
+            Socio::create([
+                'empresa_id' =>  $request->empresaId,
+                'nombre' => $partnerData[$i]['socioName'],
+                'comprobanteDomicilioPdf' => $partnerData[$i]['comprobanteDomicilio'],
+                'actaNacimientoPdf' => $partnerData[$i]['actaNacimiento'],
+                'inePdf' => $partnerData[$i]['ine'],
+                'actaMatrimonioPdf' => $partnerData[$i]['actaMatrimonio'],
+                'constanciaSituacionFiscalPdf' => $partnerData[$i]['constanciaSituacionFiscal'],
+            ]);
+        }
+    
+        return back()->with('success', 'Documentos Almacenados');
     }
+
+
 }
 

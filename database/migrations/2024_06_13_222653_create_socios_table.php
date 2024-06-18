@@ -15,15 +15,21 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('empresa_id');
             $table->string("nombre");
-            $table->binary("comprobanteDomicilioPdf");
-            $table->binary("actaNacimientoPdf");
-            $table->binary("inePdf");
-            $table->binary("actaMatrimonioPdf");
-            $table->binary("constanciaSituacionFiscalPdf");
+            #$table->binary("comprobanteDomicilioPdf");
+            #$table->binary("actaNacimientoPdf");
+            #$table->binary("inePdf");
+            #$table->binary("actaMatrimonioPdf");
+            #$table->binary("constanciaSituacionFiscalPdf");
 
             $table->foreign('empresa_id')->references('id')->on('empresas')->onDelete('cascade');
             $table->timestamps();
         });
+        	
+        DB::statement("ALTER TABLE socios ADD comprobanteDomicilioPdf MEDIUMBLOB");
+        DB::statement("ALTER TABLE socios ADD actaNacimientoPdf MEDIUMBLOB");
+        DB::statement("ALTER TABLE socios ADD inePdf MEDIUMBLOB");
+        DB::statement("ALTER TABLE socios ADD actaMatrimonioPdf MEDIUMBLOB");
+        DB::statement("ALTER TABLE socios ADD constanciaSituacionFiscalPdf MEDIUMBLOB");
     }
 
     /**

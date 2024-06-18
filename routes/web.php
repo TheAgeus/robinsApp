@@ -6,10 +6,14 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SocioController;
+use App\Http\Controllers\MailController;
+
 
 Route::get('/', [HomeController::class, 'login'])->name('welcome');
 Route::get('/login', [HomeController::class, 'login'])->name('welcome');
 Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
+
 
 // Auth functionality
 Route::post('/login', [LoginController::class, 'login'])->name('login');
@@ -34,3 +38,17 @@ Route::post('empresa/uploadFiles', [EmpresaController::class, 'uploadFiles'])->n
 
 // Generar link empresa
 Route::post('generaLinkEmpresa', [EmpresaController::class, 'generaLinkEmpresa'])->name('generaLinkEmpresa')->middleware('auth');
+
+// Enviar correo al robin
+Route::post('sendMail', [MailController::class, 'sendMail'])->name('sendMail')->middleware('auth');
+
+
+
+/* *********************** */
+/* SOCIO CONTROLLER ROUTES */
+/* *********************** */
+Route::get('showPdf/comprobanteDomicilio/{id}', [SocioController::class, 'showComprobanteDomicilio'])->name('showComprobanteDomicilio')->middleware('auth');
+Route::get('showPdf/actaNacimiento/{id}', [SocioController::class, 'showActaNacimiento'])->name('showActaNacimiento')->middleware('auth');
+Route::get('showPdf/ine/{id}', [SocioController::class, 'showIne'])->name('showIne')->middleware('auth');
+Route::get('showPdf/actaMatrimonio/{id}', [SocioController::class, 'showActaMatrimonio'])->name('showActaMatrimonio')->middleware('auth');
+Route::get('showPdf/constanciaSituacionFiscal/{id}', [SocioController::class, 'showConstanciaSituacionFiscal'])->name('showConstanciaSituacionFiscal')->middleware('auth');

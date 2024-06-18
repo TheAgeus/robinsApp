@@ -20,6 +20,10 @@ body {
   transform: scale(0.98);
 }
 
+.title > h3{
+  margin: 1rem;
+}
+
 /* START Navbar */
 .btn {
   border: none;
@@ -63,20 +67,21 @@ body {
 }
 .companyItem {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
   padding: 1rem;
   gap: 1rem;
-}
-.companyItem:hover {
-  background-color: rgba(221, 221, 221, 0.5);
-  cursor: pointer;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
+  border: 1px solid rgb(229, 229, 229);
+  border-radius: 10px;
+  margin: 1rem;
 }
 .companyName {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: bold;
   color: rgb(48, 48, 48);
-  font-size: 0.9rem;
+  font-size: 1rem;
+
 }
 .regimenFiscal {
   color: gray;
@@ -100,12 +105,28 @@ body {
   justify-content: center;
   align-items: center;
 }
+.img > img {
+  width: 2rem;
+}
+.pdfLink {
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+
+}
+.pdfField {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
 /*END Company List*/
 /* START Add Company Button */
 .addCompanyBtn {
   position: absolute;
   bottom: 1rem;
   right: 1rem;
+  display: flex;
+  gap: 0.5rem;
 }
 .addCompanyBtn > form > button:hover {
   cursor: pointer;
