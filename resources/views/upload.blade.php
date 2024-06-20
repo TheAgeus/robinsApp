@@ -156,32 +156,32 @@
 
         <div class="formField">
           <label for="partenerName${socioCount + 1}">Nombre del socio</label>
-          <input type="text" name="partnerName${socioCount + 1}" id="partnerName${socioCount + 1}">
+          <input required type="text" name="partnerName${socioCount + 1}" id="partnerName${socioCount + 1}">
         </div>
 
         <div class="formField">
           <label for="comprobanteDomicilio${socioCount + 1}">Comprobante de domicilio</label>
-          <input type="file" name="comprobanteDomicilio${socioCount + 1}" id="comprobanteDomicilio${socioCount + 1}" accept="application/pdf">
+          <input required type="file" name="comprobanteDomicilio${socioCount + 1}" id="comprobanteDomicilio${socioCount + 1}" accept="application/pdf">
         </div>
 
         <div class="formField">
           <label for="actaNacimiento${socioCount + 1}">Acta de nacimiento</label>
-          <input type="file" name="actaNacimiento${socioCount + 1}" id="actaNacimiento${socioCount + 1}" accept="application/pdf">
+          <input required type="file" name="actaNacimiento${socioCount + 1}" id="actaNacimiento${socioCount + 1}" accept="application/pdf">
         </div>
 
         <div class="formField">
           <label for="ine${socioCount + 1}">INE del socio</label>
-          <input type="file" name="ine${socioCount + 1}" id="ine${socioCount + 1}" accept="application/pdf">
+          <input required type="file" name="ine${socioCount + 1}" id="ine${socioCount + 1}" accept="application/pdf">
         </div>
 
         <div class="formField">
           <label for="actaMatrimonio${socioCount + 1}">Acta de matrimonio</label>
-          <input type="file" name="actaMatrimonio${socioCount + 1}" id="actaMatrimonio${socioCount + 1}" accept="application/pdf">
+          <input required type="file" name="actaMatrimonio${socioCount + 1}" id="actaMatrimonio${socioCount + 1}" accept="application/pdf">
         </div>
 
         <div class="formField">
           <label for="constanciaSituacionFiscal${socioCount + 1}">Constancia situacion fiscal</label>
-          <input type="file" name="constanciaSituacionFiscal${socioCount + 1}" id="constanciaSituacionFiscal${socioCount + 1}" accept="application/pdf">
+          <input required type="file" name="constanciaSituacionFiscal${socioCount + 1}" id="constanciaSituacionFiscal${socioCount + 1}" accept="application/pdf">
         </div>
       `;
       hiddenInput.value = socioCount + 1
@@ -190,14 +190,15 @@
     }
 
     try {
-      const numeroSocios = document.getElementById('numeroSocios').getAttribute('num-socios')
+      const numeroSocios = document.getElementById('sociosNumero').getAttribute('num-socios')
     } catch (error) {
       
     }
 
     function erasePartnerField() {
       var socioCount = form.getElementsByClassName('socioWrapper').length;
-      
+      numeroSocios = document.getElementById('sociosNumero').getAttribute('num-socios')
+
       if(numeroSocios == 0) {
         if(socioCount > 2) {
           form.getElementsByClassName('socioWrapper').item(socioCount-1).remove()
@@ -207,16 +208,21 @@
           alert("Necesitas mínimo dos socios");
         }
       }
+      else {
+          form.getElementsByClassName('socioWrapper').item(socioCount-1).remove()
+          hiddenInput.value = socioCount - 1
+      }
     }
 
     const closeModalBtn = document.querySelector('.entendidoBtn');
     const modal = document.querySelector('#messageModal');
     
-    if (closeModalBtn && modal) {
-      closeModalBtn.addEventListener('click', function() {
+    closeModalBtn.addEventListener('click', function() {
         modal.style.display = 'none';
-      });
-    }
+    });
+    
+
+
 
   </script>
 

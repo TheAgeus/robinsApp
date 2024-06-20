@@ -76,4 +76,24 @@ class SocioController extends Controller
             ->header('Content-Type', 'application/pdf')
             ->header('Content-Disposition', 'inline; filename="' . $socio->nombre . '_constanciaSituacionFiscal' . '"');
     }
+
+    public function eliminarSocio(Request $request) 
+    {
+        $idSocio = $request->idSocio;
+        $idUser = $request->idUser;
+        $socio = Socio::with('empresa.user')->find($idSocio);
+        try {
+            if ($socio->empresa->user->id == $idUser) {
+                $socioNombre = $socio->nombre;
+                $socio->delete();
+                return back()->with('success', 'Se eliminó correctamente el socio ' . $socioNombre);
+            }
+            else {
+                return back()->withErrors(['custom_error' => 'No se pudo borrar al socio porque esa empresa no la registraste tú.']);
+            }
+        } catch (\Throwable $th) {
+            dd($th);
+            return back()->withErrors(['custom_error' => 'No se pudo borrar al socio por alguna razón.']);
+        }
+    }
 }

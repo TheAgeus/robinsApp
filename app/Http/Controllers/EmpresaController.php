@@ -125,6 +125,24 @@ class EmpresaController extends Controller
         return back()->with('success', 'Documentos Almacenados');
     }
 
+    public function borrarEmpresa(Request $request) 
+    {
+        $idEmpresa = $request->idEmpresa;
+        $empresa = Empresa::find($idEmpresa);
+        $idUser = $empresa->user_id;
+        try {
+            if (auth()->user()->id == $idUser) {
+                $nombreEmpresa = $empresa->nombreEmpresa;
+                $empresa->delete();
+                return redirect('dashboard')->with('success', 'Se eliminó correctamente la empresa ' . $nombreEmpresa);
+            }
+            else {
+                return redirect('dashboard')->withErrors(['custom_error' => 'No se pudo borrar la empresa porque esa empresa no la registraste tú.']);
+            }
+        } catch (\Throwable $th) {
+            return redirect('dashboard')->withErrors(['custom_error' => 'No se pudo borrar la empresa por alguna razón.']);
+        }
+    }
 
 }
 

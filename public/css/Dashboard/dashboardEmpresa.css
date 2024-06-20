@@ -119,6 +119,17 @@ body {
   align-items: center;
   gap: 0.5rem;
 }
+.socioControls > form > button {
+  background-color: rgb(246, 43, 60);
+  border: none;
+  padding: 0.4rem;
+  border-radius: 10px;
+  color: rgb(255, 255, 255);
+}
+.socioControls > form > button:hover {
+  cursor: pointer;
+  opacity: 0.9;
+}
 /*END Company List*/
 /* START Add Company Button */
 .addCompanyBtn {
@@ -138,6 +149,9 @@ body {
   padding: 0.4rem;
   border-radius: 10px;
   color: rgb(255, 255, 255);
+}
+.addCompanyBtn > form > .red {
+  background-color: rgb(246, 43, 60);
 }
 /* END Add Company Button */
 /* START add company modal form */
@@ -247,3 +261,39 @@ body {
   margin-top: 1rem;
 }
 /* END message modal */
+
+/* START alert message */
+.alertModal {
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+  background-color: rgba(1, 1, 1, 0.5);
+  position: absolute;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.alertWrapper {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 10px;
+}
+.alertModal > .alertWrapper > .closeAlert:hover {
+  cursor: pointer;
+  opacity: 0.9;
+}
+.alertModal > .alertWrapper > .closeAlert {
+  background-color: rgb(56, 119, 254);
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  width: fit-content;
+  color: white;
+  margin-top: 1rem;
+}
+#alertMessage {
+  color: rgb(232, 2, 2);
+}
+#alertTitle {
+  color: rgb(244, 1, 1);
+}
+/* END alert message */

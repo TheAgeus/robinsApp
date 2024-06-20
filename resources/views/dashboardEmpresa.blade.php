@@ -89,7 +89,13 @@
               </div>
             </div>
             <div class="socioControls">
-              <div class="btn"></div>
+              <form action="{{ route('eliminarSocio') }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <input type="hidden" name="idSocio" value="{{ $socio->id }}">
+                <input type="hidden" name="idUser" value="{{ auth()->user()->id }}">
+                <button type="submit">Eliminar socio</button>
+              </form>
             </div>
           </div>
         @endforeach
@@ -106,13 +112,35 @@
         <input type="hidden" name="idEmpresa" value="{{ $empresa->id }}">
         <button onclick="openModal()">Generar link</button>
       </form>
-      <form action="{{ route('sendMail') }}" method="POST">
+      <form id="enviarCorreoForm" action="{{ route('sendMail') }}" method="POST">
         @csrf
         <input type="hidden" name="idEmpresa" value="{{ $empresa->id }}">
         <button type="submit">Enviar correo</button>
       </form>
+      <form action="{{ route('borrarEmpresa') }}" method="POST">
+        @csrf
+        @method('DELETE')
+        <input type="hidden" name="idEmpresa" value="{{ $empresa->id }}">
+        <button class="red" type="submit">Borrar empresa</button>
+      </form>
     </div>
     <!-- End Add Button -->
+
+    <!-- START alert modal -->
+    <div class="alertModal" id="alertModal">
+      <div class="alertWrapper">
+        <h3 class="alertTitle" id="alertTitle">
+          This is a title
+        </h3>
+        <div class="alertMessage" id="alertMessage">
+          This is a message
+        </div>
+        <div class="closeAlert" data-dismiss="alertModal">
+          Entendido
+        </div>
+      </div>
+    </div>
+    <!-- END alert modal -->
 
     <!-- START message modal -->
     @if ($errors->any() || session('success') || session('link'))
@@ -166,12 +194,37 @@
 
     const closeModalBtn = document.querySelector('.entendidoBtn');
     const modal = document.querySelector('#messageModal');
-    
+
+    const closeAlertMessage = document.querySelector('.closeAlert')
+    const alert = document.querySelector('#alertModal');
+
+    closeAlertMessage.addEventListener('click', function() {
+      alert.style.display = 'none';
+    });
+
     if (closeModalBtn && modal) {
       closeModalBtn.addEventListener('click', function() {
         modal.style.display = 'none';
       });
     }
+
+    document.getElementById('enviarCorreoForm').addEventListener('submit', function(event) {
+        // Obtener el número de socios desde el DOM
+        const numeroDeSocios = document.getElementsByClassName('companyItem').length;
+
+        // Convertir a número entero
+        const numSocios = parseInt(numeroDeSocios, 10);
+
+        // Verificar si hay socios
+        if (numSocios < 1) {
+          event.preventDefault(); // Previene el envío del formulario
+          alert.style.display = 'flex';
+          let title = document.getElementById('alertTitle')
+          let message = document.getElementById('alertMessage')
+          title.innerText = "No hay socios."
+          message.innerText = "Antes de enviar un correo deben de habier socios."
+        }
+    });
 
   </script>
 

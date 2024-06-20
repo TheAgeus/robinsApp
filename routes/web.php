@@ -42,6 +42,9 @@ Route::post('generaLinkEmpresa', [EmpresaController::class, 'generaLinkEmpresa']
 // Enviar correo al robin
 Route::post('sendMail', [MailController::class, 'sendMail'])->name('sendMail')->middleware('auth');
 
+// Borrar empresa
+Route::delete('borrarEmpresa', [EmpresaController::class, 'borrarEmpresa'])->name('borrarEmpresa')->middleware('auth');
+
 
 
 /* *********************** */
@@ -52,3 +55,6 @@ Route::get('showPdf/actaNacimiento/{id}', [SocioController::class, 'showActaNaci
 Route::get('showPdf/ine/{id}', [SocioController::class, 'showIne'])->name('showIne')->middleware('auth');
 Route::get('showPdf/actaMatrimonio/{id}', [SocioController::class, 'showActaMatrimonio'])->name('showActaMatrimonio')->middleware('auth');
 Route::get('showPdf/constanciaSituacionFiscal/{id}', [SocioController::class, 'showConstanciaSituacionFiscal'])->name('showConstanciaSituacionFiscal')->middleware('auth');
+
+// Borrar socio
+Route::delete('eliminarSocio', [SocioController::class, 'eliminarSocio'])->name('eliminarSocio')->middleware('auth');

@@ -5,5 +5,7 @@
 </head>
 <body>
 
+    <h3>{{ $body }}</h3>
+
 </body>
 </html>

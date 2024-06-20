@@ -5,18 +5,24 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMail;
-use App\Models\Socio;
+use App\Models\Empresa;
 
 
 class MailController extends Controller
 {
     public function sendMail(Request $request)
     {
-        $socioId = $request->idEmpresa;
-        $socio = Socio::find($socioId); 
+        $empresa = Empresa::find($request->idEmpresa);
+        $attachments = [];
+        $attachments[] = $empresa->socios;
         // Send the email
-        Mail::to('agustin.aguilar@reor-corporativo.com')->send(new SendMail($socio->comprobanteDomicilioPdf));
 
-        return "Email with BLOB attachments sent successfully!";
+        $subject = $empresa->nombreEmpresa . " - Documentos de los socios";
+
+        $body = $empresa->nombreEmpresa . " - Se adjuntan los documentos de los socios";
+
+        Mail::to('agustin.aguilar@reor-corporativo.com')->send(new SendMail($subject, $body, $attachments));
+
+        return back()->with('success', 'Se envió el correo electrónico a robinson.rodriguez@reor-corporativo.com');
     }
 }
