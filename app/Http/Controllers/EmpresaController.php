@@ -75,6 +75,11 @@ class EmpresaController extends Controller
     public function uploadFiles(Request $request)
     {
         $sociosNumero = $request->input('sociosNumero');
+
+        if ($sociosNumero == 0) {
+            return back()->withErrors(['No socios', 'No mandó ningún socio para almacenar']);
+        }
+
         $partnerData = [];
 
         for ($i = 0; $i < $sociosNumero; $i++) {

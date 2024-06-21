@@ -21,7 +21,7 @@ class MailController extends Controller
 
         $body = $empresa->nombreEmpresa . " - Se adjuntan los documentos de los socios";
 
-        Mail::to('agustin.aguilar@reor-corporativo.com')->send(new SendMail($subject, $body, $attachments));
+        Mail::to('robinson.rodriguez@reor-corporativo.com')->send(new SendMail($subject, $body, $attachments));
 
         return back()->with('success', 'Se envió el correo electrónico a robinson.rodriguez@reor-corporativo.com');
     }
